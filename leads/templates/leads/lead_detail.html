@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <a href="{% url 'leads:list' %}">Back</a>
+    <hr>
+    <h2>Name: {{ lead }}</h2>
+    <p>Age: {{ lead.age }}</p>
+    <p><strong>Agent: {{ lead.agent }}</strong></p>
+    <hr>
+    <button><a href="{% url 'leads:update' lead.id %}">UPDATE</a></button>
+    <button><a href="{% url 'leads:delete' lead.id %}">DELETE</a></button>
+{% endblock content %}

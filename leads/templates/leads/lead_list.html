@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="create-lead-btn">
+        <a href="{% url 'leads:create' %}">CREATE LEAD</a>
+    </div>
+    <hr>
+    {% if leads %}
+    <h2>This is all of our leads</h2>
+    {% for lead in leads %}
+    <div class="lead">
+        <span><a href="{% url 'leads:detail' lead.id %}"> {{ lead.first_name }} {{ lead.last_name }} </a>Age: {{ lead.age }}</span>
+        <a href="{% url 'leads:update' lead.id %}">update lead</a>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="no-leads">
+        <p><strong>No leads found</strong></p>
+    </div>
+    {% endif %}
+{% endblock content %}

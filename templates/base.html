@@ -6,11 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}DJCRM{% endblock title %}</title>
     <link rel="stylesheet" href="{% static 'leads/styles.css' %}">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
 
-    {% block content %}
-    {% endblock content %}
+    <div class="max-w-7xl mx-auto">
+        {% include 'navbar.html' %}
+        {% block content %}
+        {% endblock content %}
+    </div>
+    
 
 </body>
 </html>

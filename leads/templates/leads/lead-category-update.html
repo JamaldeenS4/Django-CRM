@@ -12,25 +12,23 @@
                 <a href="{% url 'leads:detail' lead.id %}" class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">
                     Overview
                 </a>
-                <a class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">
+                <a href="{% url 'leads:lead-category-update' lead.id %}" class="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1">
                     Category
                 </a>
-                <a href="{% url 'leads:update' lead.id %}" class="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1">
+                <a href="{% url 'leads:update' lead.id %}" class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">
                     Update Details
                 </a>
             </div>
-           <div class="max-w-lg mx-auto w-full">
-                <form method="post" class="mt-5">
+            <div class="max-w-lg mx-auto w-full">
+                <form method="post">
                     {% csrf_token %}
                     {{ form|crispy }}
-                    <div class="mt-5 flex gap-3">
-                        <button type="submit" class="flex-1 text-white bg-blue-500 hover:bg-blue-600 px-3 py-2 rounded-md">Submit</button>
-                        <a href="{% url 'leads:delete' lead.id %}" class="flex-1 text-center text-white bg-red-500 hover:bg-red-600 px-3 py-2 rounded-md">
-                            DELETE
-                        </a>
-                    </div>
+                    <button type="submit" class="w-full text-white bg-blue-500 hover:bg-blue-600 px-3 py-2 rounded-md">submit</button>
                 </form>
-           </div>
+            </div>
+            <a href="{% url 'leads:delete' lead.id %}" class="mt-3 w-1/2 flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+                DELETE
+            </a>
         </div>
       <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="https://dummyimage.com/400x400">
     </div>

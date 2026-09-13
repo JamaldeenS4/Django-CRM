@@ -59,9 +59,10 @@ class AgentUpdateView(OrganizerAndLoginRequiredMixin, generic.UpdateView):
 
     def get_success_url(self):
         return reverse('agents:list')
-    
+
     def get_queryset(self):
-        return Agent.objects.all()
+        request_user_userprofile = self.request.user.userprofile
+        return Agent.objects.filter(organisation=request_user_userprofile)
 
 class AgentDeleteView(OrganizerAndLoginRequiredMixin, generic.DeleteView):
     template_name = 'agents/agent_delete.html'

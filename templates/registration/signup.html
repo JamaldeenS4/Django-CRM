@@ -3,6 +3,7 @@
 
 {% block content %}
 <div class="max-w-lg mx-auto w-full">
+    <p class="text-sm text-gray-600 mb-4">Create an organizer account to manage leads and agents for your organization.</p>
     <form method="post">
         {% csrf_token %}
         {{ form|crispy }}

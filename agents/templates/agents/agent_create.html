@@ -6,8 +6,9 @@
 <div class="max-w-lg mx-auto w-full">
     <div class="py-5 border-t border-gray-200">
         <h1 class="text-4xl text-gray-800">Create a new Agent</h1>
+        <p class="text-sm text-gray-600 mt-2">Add an agent to your organization so they can be assigned leads and track conversations.</p>
     </div>
-  
+    
     <form method="post" class="mt-5">
         {% csrf_token %}
         {{ form|crispy }}

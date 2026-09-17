@@ -3,23 +3,17 @@
 
 {% block content %}
 <section class="text-gray-600 body-font overflow-hidden">
-  <div class="container px-5 py-24 mx-auto">
-    <div class="lg:w-4/5 mx-auto flex flex-wrap">
-        <div class="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
+    <div class="container px-5 py-24 mx-auto">
+    <div class="w-full max-w-2xl mx-auto">
+        <div class="w-full bg-white rounded-lg shadow p-6">
             <h2 class="text-sm title-font text-gray-500 tracking-widest">AGENT</h2>
             <h1 class="text-gray-900 text-3xl title-font font-medium mb-4">{{ agent.user.username }}</h1>
-            <div class="flex mb-4">
-                <a href="{% url 'agents:detail' agent.id %}" class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">
-                    Overview
-                </a>
-                <a class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">
-                    Reviews
-                </a>
-                <a href="{% url 'agents:update' agent.id %}" class="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1">
-                    Update Details
-                </a>
+            <div class="flex gap-3 mb-6">
+                <a href="{% url 'agents:detail' agent.id %}" class="px-2 py-1 text-sm text-gray-600 bg-gray-100 rounded">Overview</a>
+                <a href="{% url 'agents:update' agent.id %}" class="px-2 py-1 text-sm text-white bg-indigo-500 rounded">Update Details</a>
             </div>
-            <div class="max-w-lg mx-auto w-full">
+            <div class="max-w-lg w-full">
+                <p class="text-sm text-gray-600 mb-4">Update this agent's profile information. Changes here update the user's name and contact details used across the platform.</p>
                 <form method="post" class="mt-5">
                     {% csrf_token %}
                     {{ form|crispy }}
@@ -32,7 +26,6 @@
                 </form>
             </div>
         </div>
-      <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="https://dummyimage.com/400x400">
     </div>
   </div>
 </section>

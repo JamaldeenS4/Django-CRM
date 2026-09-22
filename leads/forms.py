@@ -20,6 +20,20 @@ class LeadModelForm(forms.ModelForm):
             'email',
         )
 
+class StudentCreateModelForm(forms.ModelForm):
+    class Meta:
+        model = Lead
+        fields = (
+            'first_name',
+            'last_name',
+            'age',
+            'matric_no',
+            'location',
+            'phone_number',
+            'email',
+            'organisation',
+        )
+
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
@@ -44,7 +58,7 @@ class AssignAgentForm(forms.Form):
     def __init__(self, *args, **kwargs):
         request = kwargs.pop('request')
         agents = Agent.objects.filter(organisation=request.user.userprofile)
-        super(AssignAgentForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.fields['agent'].queryset = agents
 
 class LeadCategoryUpdateForm(forms.ModelForm):
@@ -52,5 +66,4 @@ class LeadCategoryUpdateForm(forms.ModelForm):
         model = Lead
         fields = (
             'category',
-        )
-        
+        )      

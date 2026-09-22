@@ -1,11 +1,12 @@
 from django.shortcuts import redirect, render, get_object_or_404, reverse
 from .models import Agent, Lead, Category
 from django.views import generic
-from .forms import LeadForm, LeadModelForm, CustomUserCreationForm, AssignAgentForm, LeadCategoryUpdateForm
+from .forms import LeadForm, LeadModelForm, CustomUserCreationForm, AssignAgentForm, LeadCategoryUpdateForm, StudentCreateModelForm
 from django.core.mail import send_mail
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from agents.mixins import OrganizerAndLoginRequiredMixin
+from django.urls import reverse_lazy
 # Create your views here.
 
 # CRUD - Create, Retrieve, Update and Delete + List
@@ -209,7 +210,7 @@ class AssignAgentView(OrganizerAndLoginRequiredMixin, generic.FormView):
     form_class = AssignAgentForm
 
     def get_form_kwargs(self, **kwargs):
-        kwargs = super(AssignAgentView, self).get_form_kwargs(**kwargs)
+        kwargs = super().get_form_kwargs(**kwargs)
         kwargs.update  ({
             'request': self.request
         })
@@ -232,7 +233,7 @@ class CategoryListView(LoginRequiredMixin, generic.ListView):
     def get_context_data(self, **kwargs):
         user = self.request.user
 
-        context = super(CategoryListView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         if user.is_organizer:
             queryset = Category.objects.filter(organisation=user.userprofile)
         else:
@@ -295,3 +296,9 @@ class LeadCategoryUpdateView(LoginRequiredMixin, generic.UpdateView):
 
     def get_success_url(self):
         return reverse('leads:detail', kwargs={'pk': self.get_object().id})
+
+class LeadCreateView(generic.CreateView):
+    model = Lead
+    form_class = StudentCreateModelForm
+    template_name = 'leads/second-create.html'
+    success_url = reverse_lazy('landing-page')

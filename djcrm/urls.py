@@ -23,7 +23,8 @@ urlpatterns = [
     path('reset-password/', PasswordResetView.as_view(), name='reset-password'),
     path('password_reset_done/', PasswordResetDoneView.as_view(), name='password_reset_done'),
     path('password-reset-confirm/<uidb64>/<token>/', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
-    path('password_reset_complete/', PasswordResetCompleteView.as_view(), name='password_reset_complete')
+    path('password_reset_complete/', PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+    path('lead_create/', views.LeadCreateView.as_view(), name='lead-create')
 ]
 
 if settings.DEBUG:

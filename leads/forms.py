@@ -34,16 +34,26 @@ class StudentCreateModelForm(forms.ModelForm):
             'organisation',
         )
 
+
 class CustomUserCreationForm(UserCreationForm):
-    class Meta:
+    class Meta(UserCreationForm.Meta):
         model = User
-        fields = (
-            "username",
-            "first_name",
-            "last_name",
-            "email",
+        fields = UserCreationForm.Meta.fields + (
+            'first_name',
+            'last_name',
+            'email'
         )
-        field_classes = {"username": UsernameField}
+        
+# class CustomUserCreationForm(UserCreationForm):
+#     class Meta:
+#         model = User
+#         fields = (
+#             "username",
+#             "first_name",
+#             "last_name",
+#             "email",
+#         )
+#         field_classes = {"username": UsernameField}
 
 
 class LeadForm(forms.Form):

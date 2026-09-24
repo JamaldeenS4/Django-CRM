@@ -14,7 +14,6 @@ from django.urls import reverse_lazy
 class SignupView(generic.CreateView):
     template_name = 'registration/signup.html'
     form_class = CustomUserCreationForm
-    model = Lead
     def get_success_url(self):
         return reverse('login')
 

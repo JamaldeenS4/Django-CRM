@@ -138,8 +138,8 @@ MAILERS = {
 }
 
 AUTH_USER_MODEL = 'leads.User'
-LOGIN_REDIRECT_URL = '/leads'
-LOGIN_URL = '/login'
+LOGIN_REDIRECT_URL = '/leads/'
+LOGIN_URL = 'login'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 

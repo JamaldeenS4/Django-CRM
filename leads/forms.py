@@ -9,7 +9,7 @@ User = get_user_model()
 class LeadModelForm(forms.ModelForm):
     class Meta:
         model = Lead
-        fields = (
+        fields = [
             'first_name',
             'last_name',
             'age',
@@ -18,7 +18,11 @@ class LeadModelForm(forms.ModelForm):
             'location',
             'phone_number',
             'email',
-        )
+        ]
+    def __init__(self, *args, **kwargs):
+        request = kwargs.pop('request')
+        super().__init__(*args, **kwargs)
+        self.fields['agent'].queryset = Agent.objects.filter(organisation=request.user.userprofile)
 
 class StudentCreateModelForm(forms.ModelForm):
     class Meta:
@@ -77,3 +81,4 @@ class LeadCategoryUpdateForm(forms.ModelForm):
         fields = (
             'category',
         )      
+

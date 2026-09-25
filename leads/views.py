@@ -4,7 +4,7 @@ from django.views import generic
 from .forms import LeadForm, LeadModelForm, CustomUserCreationForm, AssignAgentForm, LeadCategoryUpdateForm, StudentCreateModelForm
 from django.core.mail import send_mail
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from agents.mixins import OrganizerAndLoginRequiredMixin
 from django.urls import reverse_lazy
 # Create your views here.
@@ -82,6 +82,11 @@ class LeadCreate(OrganizerAndLoginRequiredMixin, generic.CreateView):
 
         return redirect(self.get_success_url())
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+
     #def form_valid(self, form):
         #lead = form.save(commit=False)
         #lead.organisation = self.request.user.userprofile
@@ -137,9 +142,10 @@ def lead_update(request, pk):
     }
     return render(request, 'leads/lead_update.html', context)
 
-class LeadDelete(LoginRequiredMixin, generic.DeleteView):
+class LeadDelete(PermissionRequiredMixin, generic.DeleteView):
     template_name = 'leads/lead_delete.html'
     model = Lead
+    permission_required = 'leads.delete_lead'
     def get_success_url(self):
         return reverse('leads:list')
         
